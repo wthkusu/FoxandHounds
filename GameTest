@@ -1,0 +1,66 @@
+import com.game.foxandhounds.DatabaseUtil;
+import com.game.foxandhounds.Game;
+import com.game.foxandhounds.GameBoard;
+import com.game.foxandhounds.LoggerUtil;
+
+public class GameTest {
+    public static void main(String[] args) {
+        testGameBoard();
+        testLoggerUtil();
+        testDatabaseUtil();
+        testGame();
+    }
+
+    // Test for GameBoard class
+    public static void testGameBoard() {
+        System.out.println("Testing GameBoard...");
+        GameBoard gameBoard = new GameBoard();
+
+        // Display the initial board
+        gameBoard.displayBoard();
+
+        // Validate initial positions
+        char[][] board = gameBoard.getBoard();
+        assert board[0][0] == 'F' : "Fox should be at (0, 0)";
+        assert board[7][1] == 'H' : "Hound should be at (7, 1)";
+        assert board[7][3] == 'H' : "Hound should be at (7, 3)";
+        assert board[7][5] == 'H' : "Hound should be at (7, 5)";
+        assert board[7][7] == 'H' : "Hound should be at (7, 7)";
+        System.out.println("GameBoard test passed.\n");
+    }
+
+    // Test for LoggerUtil class
+    public static void testLoggerUtil() {
+        System.out.println("Testing LoggerUtil...");
+        LoggerUtil.log("This is a test log message.");
+        System.out.println("Check the console output for the log message.\n");
+    }
+
+    // Test for DatabaseUtil class
+    public static void testDatabaseUtil() {
+        System.out.println("Testing DatabaseUtil...");
+        String testBoardState = "F E E E E E E E\n" +
+                "E E E E E E E E\n" +
+                "E E E E E E E E\n" +
+                "E E E E E E E E\n" +
+                "E E E E E E E E\n" +
+                "E E E E E E E E\n" +
+                "E E E E E E E E\n" +
+                "H E H E H E H E";
+
+        // Save the board state to the database
+        DatabaseUtil.saveBoardState(testBoardState);
+        System.out.println("Board state saved to the database. Check your database table.\n");
+    }
+
+    // Test for Game class
+    public static void testGame() {
+        System.out.println("Testing Game...");
+        Game game = new Game();
+
+        // Simulate one turn for the Fox
+        System.out.println("Displaying initial game state:");
+        game.start(); // Note: This will run the game loop; for testing, you may want to modify it to limit the number of iterations.
+        System.out.println("Game tested (ensure interaction works correctly).\n");
+    }
+}
