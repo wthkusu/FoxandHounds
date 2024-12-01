@@ -1,0 +1,21 @@
+package com.game.foxandhounds;
+import java.sql.*;
+
+public class DatabaseUtil {
+    private static final String URL = "jdbc:mysql://localhost:3306/fox_hounds_game";
+    private static final String USER = "root";
+    private static final String PASSWORD = "password";
+
+    // Save the board state to the database
+    public static void saveBoardState(String boardState) {
+        try (Connection connection = DriverManager.getConnection(URL, USER, PASSWORD)) {
+            String query = "INSERT INTO game_board (board_state) VALUES (?)";
+            try (PreparedStatement stmt = connection.prepareStatement(query)) {
+                stmt.setString(1, boardState);
+                stmt.executeUpdate();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+}
