@@ -1,0 +1,44 @@
+package com.game.foxandhounds;
+
+public class GameBoard {
+    private char[][] board;
+
+    public GameBoard() {
+        board = new char[8][8]; // 8x8 board
+        initializeBoard();
+    }
+
+    // Initializes the board with initial positions of Fox and Hounds
+    private void initializeBoard() {
+        // Set 'F' for Fox, 'H' for Hounds, and 'E' for empty spaces
+        for (int i = 0; i < 8; i++) {
+            for (int j = 0; j < 8; j++) {
+                board[i][j] = 'E'; // Initialize all positions as empty
+            }
+        }
+        board[0][0] = 'F'; // Fox at the top-left corner
+        board[7][1] = 'H'; // First Hound position
+        board[7][3] = 'H'; // Second Hound position
+        board[7][5] = 'H'; // Third Hound position
+        board[7][7] = 'H'; // Fourth Hound position
+    }
+
+    // Display the game board
+    public void displayBoard() {
+        for (int i = 0; i < 8; i++) {
+            for (int j = 0; j < 8; j++) {
+                System.out.print(board[i][j] + " ");
+            }
+            System.out.println();
+        }
+    }
+
+    // Getters and Setters
+    public char[][] getBoard() {
+        return board;
+    }
+
+    public void setBoard(char[][] board) {
+        this.board = board;
+    }
+}
