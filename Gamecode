@@ -1,0 +1,55 @@
+package com.game.foxandhounds;
+import java.util.Random;
+import java.util.Scanner;
+
+public class Game {
+    private GameBoard board;
+    private boolean isFoxTurn;
+
+    public Game() {
+        board = new GameBoard();
+        isFoxTurn = true; // Fox starts
+    }
+
+    public void start() {
+        Scanner scanner = new Scanner(System.in);
+        while (!isGameOver()) {
+            board.displayBoard();
+            if (isFoxTurn) {
+                System.out.println("Your turn as Fox! (Enter row and column)");
+                int row = scanner.nextInt();
+                int col = scanner.nextInt();
+                makeFoxMove(row, col);
+            } else {
+                System.out.println("Machine's turn as Hound!");
+                makeHoundMove();
+            }
+            isFoxTurn = !isFoxTurn; // Switch turns
+        }
+        System.out.println("Game Over!");
+    }
+
+    // Check if the game is over
+    private boolean isGameOver() {
+        // Implement game over logic (Fox is cornered or reached the other side)
+        return false;
+    }
+
+    // Fox move logic
+    private void makeFoxMove(int row, int col) {
+        // Move Fox according to the user input
+        board.getBoard()[row][col] = 'F';
+    }
+
+    // Hound move logic (Machine makes a random move)
+    private void makeHoundMove() {
+        Random rand = new Random();
+        int row = rand.nextInt(8);
+        int col = rand.nextInt(8);
+        while (board.getBoard()[row][col] != 'E') {
+            row = rand.nextInt(8);
+            col = rand.nextInt(8);
+        }
+        board.getBoard()[row][col] = 'H';
+    }
+}
